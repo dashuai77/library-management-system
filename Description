@@ -1,0 +1,41 @@
+Project Description/Background
+Library management system
+ Nowadays, more and more college students go to library to look for books to finish their assignments and do some projects. However, it is difficult for many students to find the book that they want in the library. And because lots of students come to the library almost every day, the libraries will spend much time helping students find their books and arrange the books in the library. So the purpose of the library management system is to help students get the detailed information about the book that they want and assist librarians manage book information more efficiently. 
+ Specific functions
+Manage information for libraries
+Manage information for books
+Manage information for staffs
+Manage infromation for readers
+Manage borrowing information for readers
+Mange returning information for readers
+Manage credit information for readers
+Manage information for a storage
+The main entity
+1.  library
+  Every library has lots of books, staffs and only one storage. The information to be held on each library includes the libraryID, library name, location, phone number, the total number of books, the total number of staffs.
+2.  book
+  One book can be borrowed by one reader. The information to be held on each book includes the ISBN, book title, price, exact location of the book, the total number of the book, the number of books left, the total copies of the book.
+3. the type of books
+  The purpose of this entity is to help librarians and readers know the list of books that belong to a particular category. The information to be held on each type of books includes the name of each type of book, booktypeID, the number of books in each type. 
+4. staff 
+  One library can have many staffs. The information to be held on each staff includes the staffID, staff name, salary, working years. 
+5. the type of staff ( librarians, storage administrator)
+  One library may have many librarians and only one storage administrator. The librarians are mainly responsible for helping readers find books that they need and arrange the books in the library. And the storage administrator is responsible for managing the storage and ensure every book in the storage can be removed to the library. The information to be held on each librarian and administrators includes ID, name, salary, working years.
+6. readers 
+ The information to be held on each reader includes the readerID, reader name, phone number, address.
+7. the type of reader (student, full professor, associate professor)
+  The reader can be separated to three types such as student, full professor, associate professor. The reader of each type has their own borrow number and borrow time. For example, the student can borrow 10 books at a time and keep these books for 2 weeks. By contrast, the full professor can borrow 20 books at a time and keep these books for 1 month.
+8. borrowing
+The information to be held on each borrowing includes borrowing number, borrowing date.
+
+
+9. returning
+The information to be held on each returning includes returning number, returning date.
+
+
+10. Honesty
+The purpose of the honesty entity is to help students renew a book. And in some instances, the students may not return their books in a schedule time, or they damage the books. In this time, the honesty entity will conduct some credit points of students and fine students. The information to be held on each honesty includes the initial credit point, the initial money.
+
+
+11. storage
+The purpose of storage is to keep some books that has not been removed to the library. The information to be held on each storage includes storageID, storage name, capacity of books, location.
