@@ -1,1 +1,63 @@
+Library (libraryID, libraryName, libraryAddress)
+Primary Key: libraryID
 
+Book (ISBN, bookTitle, pubDate, price, authorID)
+Primary Key: ISBN
+Foreign Key: authorID refers Author.authorID
+
+Author (authorID, Name, Address)
+Primary Key: authorID
+
+Customer (CustomerID,name)
+Primary Key: CustomerID
+
+Honesty (customerID, lateTime, lateDay, borrowTime, borrowDate)*
+Primary key: customerID
+Foreign key: customerID refers Customer.customerID
+
+CustomerPhone (phoneNum, customerID)
+Primary key: phoneNum
+Foreign key: customerID refers Customer.customerID
+
+PaymentMethod (accountNum, customerID)
+Primary key: accountNum
+Foreign key: customerID refers Customer.customerID
+
+Purchase (order#, date, customerID, staffID)
+Primary key: orderNum
+Foreign key: customerID refers Customer.customerID
+Foreign key: staffID refers Staff.staffID
+
+PickUp(orderNum, pickupTime, status, ISBN, libraryID)
+Primary key: orderNum
+Foreign key: ISBN refers Book.ISBN
+Foreign key: libraryID refers Library.libraryID
+
+Deliver(orderNum, address, status, staffID)
+Primary key: orderNum
+Foreign key: staffID refers Staff.staffID
+
+Staff (staffID,name, Salary) 
+Primary key: staffID
+
+
+Administrator (staffID,libraryID)
+Primary key: staffID
+Foreign key: staffID refers Staff.staffID
+Foreign key: libraryID refers Library.libraryID
+
+Storage (libraryID, ISBN, qKeep, qSale)
+Primary key: libraryID, ISBN
+Foreign key: libraryID refers Library.libraryID
+Foreign key: ISBN refers Book.ISBN
+
+Rent (orderNum, rentDate, returnDate, status, lateDate, customerID, ISBN)
+Primary Key: orderNum
+Foreign key: customerID refers Customer.customerID
+Foreign key: ISBN refers Book.ISBN
+
+Request (ReqID, CustomerID, ISBN, libraryID)
+Primary Key: requestID
+Foreign key: customerID refers Customer.customerID
+Foreign key: ISBN refers Book.ISBN
+Foreign key: libraryID refers Library.libraryID
