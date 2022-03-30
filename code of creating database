@@ -1,0 +1,100 @@
+create table library(
+libraryID int(3) primary key not null,
+ libraryname varchar(20) not null,
+ libraryaddress varchar(30) not null);
+ 
+ create table Author(
+ authorID int(3) primary key,
+ authorname varchar(10),
+ authoraddress varchar(30));
+ 
+ create table Book(
+ ISBN int(10) primary key,
+ booktitle varchar(20),
+ pubdate date,
+ price int(3),
+ authorID int(3),
+ foreign key(authorID) references Author(authorID));
+ 
+ Create table Customer(
+ customerID int(4) primary key,
+ customername varchar(10));
+ 
+ create table CustomerPhone(
+ phoneNum int(15) primary key,
+ customerID int(4),
+ foreign key (customerID) references Customer(customerID));
+ 
+ create table PaymentMethod(
+ accountNum int(15) primary key,
+ customerID int(4),
+ foreign key (customerID) references Customer(customerID));
+ 
+ create table staff(
+ staffID int(3) primary key,
+ staffname varchar(20),
+ salary float(3,2));
+ 
+ create table Purchase(
+ orderNum int(4) primary key,
+ date datetime,
+ customerID int(4),
+ staffID int(3),
+ foreign key (customerID) references Customer(customerID),
+ foreign key (staffID) references staff(staffID));
+ 
+ create table PickUp(
+ orderNum int(3) primary key,
+ pickupTime date,
+ status varchar(10),
+ ISBN int(10),
+ libraryID int(3),
+ foreign key (ISBN) references Book(ISBN),
+ foreign key (libraryID) references library(libraryID));
+ 
+ create table Deliver(
+ orderNum int(3) primary key,
+ address varchar(20),
+ status varchar(10),
+ staffID int(3),
+  foreign key (staffID) references staff(staffID));
+  
+  create table Administrator(
+  staffID int(3) primary key,
+  libraryID int(3),
+  foreign key (staffID) references staff(staffID),
+  foreign key (libraryID) references library(libraryID));
+  
+ create table Storage(
+ libraryID int(3),
+ ISBN int(10),
+ primary key(libraryID,ISBN),
+ qkeep varchar(10),
+ qsale varchar(10),
+ foreign key (libraryID) references library(libraryID),
+ foreign key (ISBN) references Book(ISBN));
+ 
+ create table Rent(
+ orderNum int(3) primary key,
+ rentdate date,
+ returndate date,
+ status varchar(10),
+ latedate date,
+ customerID int(3),
+ ISBN int(10),
+ foreign key (customerID) references Customer(customerID),
+ foreign key (ISBN) references Book(ISBN));
+ 
+  create table Request(
+  requestID int(3),
+  customerID int(3),
+  ISBN int(10),
+  libraryID int(3),
+  foreign key (customerID) references Customer(customerID),
+ foreign key (ISBN) references Book(ISBN),
+ foreign key (libraryID) references library(libraryID));
+ 
+ 
+ 
+ 
+ 
