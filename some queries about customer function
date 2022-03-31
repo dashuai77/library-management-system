@@ -1,0 +1,76 @@
+	1. List the book titles that are published before '2021-06-01'.
+
+          select  booktitle
+          from Book
+          where pubdate < '2021-06-01';
+
+  2.   List all the books that cost more than average and store these books in descending alphabetical order.
+
+        select b1.ISBN,b1.booktitle
+        from Book b1
+        where b1.price > (
+                                         select avg(price)
+                                         from Book b2
+                                         where b1.ISBN=b2.ISBN)
+       order by booktitle desc;
+
+	3. List all the books and their price that are written by 'Quin Park'.
+	 
+	Select ISBN, booktitle, price
+	From Book
+	Join Author using(authorID)
+	Where authorname  = 'Quin Park';
+
+   4. List phone numbers for customers who request the book called 'The Bunny in the Rye'.
+
+        select phoneNum
+        from CustomerPhone 
+        join Request using(customerID)
+        join Book using(ISBN)
+        where booktitle = 'The Bunny in the Rye';
+
+   5. List the second most expensive book.
+
+       select ISBN,booktitle
+       from Book 
+       order by price desc
+       limit 1,1;
+
+   6. List all the authors who write more than 1 book.
+
+      select a.authorID, a.authorname
+     from Author a
+     where a.authorID in (
+                                       select b.authorID
+                                       from Book b
+                                       group by b.authorID
+                                       Having count(b.ISBN) > 1)
+
+   7. List the customer whose accountNum is '500 333 0303'.
+
+     select customerID, customername
+     from Customer
+     join PaymentMethod using(customerID)
+     where accountNUm = 500 333 0303;
+ 
+   8. List all the customers who didn't request any book.
+
+   Select c.customerID, c.customername
+  From Customer c
+  Where c.customerID not in (
+                              select r.customerID
+                              from Request r
+                              where c.customerID = r.customerID)
+
+
+  9. change 1st library's address to '6401 BroadWay Street,  MT 59821'.
+
+    update library
+    set  libraryaddress = '6401 BroadWay Street,  MT 59821'
+    where libraryname = '1st library';
+
+  10. List the full name of all customers who have Aias in their name.
+ 
+   select customername
+   from Customer
+   where customername like %Aias%
