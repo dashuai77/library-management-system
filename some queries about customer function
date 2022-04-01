@@ -1,35 +1,36 @@
-	1. List the book titles that are published on '06-JUN-21'.
+  1. List the book titles that are published on '06-JUN-21'.
 
           select  booktitle
           from Book
           where pubdate = '06-JUN-21';
 
-  2.   List all the books that cost more than average and store these books in descending alphabetical order.
+  2.   List all the books that cost less than average and store these books in descending alphabetical order. 
 
-        select b1.ISBN,b1.booktitle
-        from Book b1
-        where b1.price > (
-                                         select avg(price)
-                                         from Book b2
-                                         where b1.ISBN=b2.ISBN)
-       order by booktitle desc;
+     
+       select b1.ISBN,b1.booktitle
+       from Book b1
+       where b1.price < (
+       select avg(b2.price)
+       from Book b2
+        )
+        order by booktitle desc;
 
-	3. List all the books and their price that are written by 'Quin Park'.
+	3. List all the books and their price that are written by 'QuinPark'.
 	 
 	Select ISBN, booktitle, price
 	From Book
 	Join Author using(authorID)
 	Where concat(authorfname,authorlname)  = 'QuinPark';
-	
-   4. List phone numbers for customers who request the book called 'The Bunny in the Rye'.
+
+   4. List phone numbers for customers who request the book called 'My Pancake'.
 
         select phoneNum
         from CustomerPhone 
         join Request using(customerID)
         join Book using(ISBN)
-        where booktitle = 'The Bunny in the Rye';
+        where booktitle = 'My Pancake';
 
-   5. List the second most expensive book.
+   5. List the second most expensive book.(xxxx)
 
        select ISBN,booktitle
        from Book 
@@ -38,24 +39,25 @@
 
    6. List all the authors who write more than 1 book.
 
-      select a.authorID, a.authorname
+
+   select a.authorID, concat(authorfname,authorlname) as authorname
      from Author a
      where a.authorID in (
-                                       select b.authorID
-                                       from Book b
-                                       group by b.authorID
-                                       Having count(b.ISBN) > 1)
+                            select b.authorID
+                             from Book b
+                             group by b.authorID
+                             Having count(b.ISBN) > 1)
 
-   7. List the customer whose accountNum is '500 333 0303'.
+   7. List the customer whose accountNum is '5003330303'.
 
-     select customerID, customername
+     select customerID, concat(customerfname,customerlname) as customername
      from Customer
      join PaymentMethod using(customerID)
-     where accountNUm = 500 333 0303;
+     where accountNUm = 5003330303;
  
    8. List all the customers who didn't request any book.
 
-   Select c.customerID, c.customername
+   Select c.customerID, concat(customerfname,customerlname) as customername
   From Customer c
   Where c.customerID not in (
                               select r.customerID
@@ -71,6 +73,7 @@
 
   10. List the full name of all customers who have Aias in their name.
  
-   select customername
+   
+   select concat(customerfname,customerlname) as customername
    from Customer
-   where customername like %Aias%
+  where customerfname like '%Aias%' or customerlname like '%Aias%';
