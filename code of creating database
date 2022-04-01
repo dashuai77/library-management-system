@@ -68,7 +68,7 @@ create table Administrator(
  foreign key (staffID) references staff(staffID),
  foreign key (libraryID) references library(libraryID));
   
-create table Storage(
+create table LStorage(
  libraryID int,
  ISBN int,
  qkeep varchar(10),
