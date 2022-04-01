@@ -19,8 +19,8 @@
 	Select ISBN, booktitle, price
 	From Book
 	Join Author using(authorID)
-	Where authorname  = 'Quin Park';
-
+	Where concat(authorfname,authorlname)  = 'QuinPark';
+	
    4. List phone numbers for customers who request the book called 'The Bunny in the Rye'.
 
         select phoneNum
